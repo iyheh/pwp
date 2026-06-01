@@ -319,7 +319,7 @@ function initDogCarousel() {
         
         card.innerHTML = `
             <div class="carousel-photo">
-                <img src="${dog.image}" alt="${dog.name}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                <img src="${dog.image}" alt="${dog.name}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">
             </div>
             <div class="carousel-name">${dog.name}</div>
         `;
@@ -349,6 +349,10 @@ function initDogCarousel() {
         dogCarouselTrack.appendChild(card);
     });
 
+    // 4개 카드가 균등하게 들어오도록 너비 동적 조율
+    adjustCarouselCardWidth();
+    window.addEventListener("resize", adjustCarouselCardWidth);
+
     // 3초 타이머 시작
     startCarouselTimer();
 
@@ -358,6 +362,18 @@ function initDogCarousel() {
         container.addEventListener("mouseenter", stopCarouselTimer);
         container.addEventListener("mouseleave", startCarouselTimer);
     }
+}
+
+function adjustCarouselCardWidth() {
+    const container = document.querySelector(".carousel-container");
+    if (!container || !dogCarouselTrack) return;
+    const containerWidth = container.getBoundingClientRect().width;
+    const gap = window.innerWidth <= 768 ? 10 : 20;
+    const cardWidth = (containerWidth - (3 * gap)) / 4;
+    
+    dogCarouselTrack.querySelectorAll(".carousel-card").forEach(card => {
+        card.style.width = `${cardWidth}px`;
+    });
 }
 
 function startCarouselTimer() {

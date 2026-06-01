@@ -260,7 +260,6 @@ body {
 
 .carousel-card:hover {
     border-color: var(--primary);
-    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
 }
 
@@ -270,18 +269,19 @@ body {
 }
 
 .carousel-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 100%;
+    height: 150px;
+    border-radius: var(--radius-sm);
     background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
     margin: 0 auto 12px auto;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
     box-shadow: var(--shadow-sm);
     transition: border-color 0.3s;
+    overflow: hidden;
 }
 
 .carousel-card.active .carousel-photo {
@@ -3341,11 +3341,12 @@ body {
         padding: 10px 5px;
     }
     .carousel-photo {
-        width: 45px;
-        height: 45px;
-        border-width: 2px;
+        width: 100%;
+        height: 70px;
+        border-width: 1.5px;
         margin-bottom: 6px;
         font-size: 1.2rem;
+        border-radius: 4px;
     }
     .carousel-name {
         font-size: 0.75rem;
