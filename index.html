@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWP (Pet with People) - 원격 반려견 매칭 & 후원 서비스</title>
+    <!-- 프리미엄 폰트 적용 (Montserrat & Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="web-container">
+        <!-- 1. HEADER (상단 헤더 - 고정형) -->
+        <header class="web-header">
+            <div class="header-logo" id="header-logo-btn">
+                <img src="images/pwp_logo.png" alt="P.w.P" class="logo-img">
+                <span class="logo-text">PWP</span>
+            </div>
+            
+            <nav class="header-nav">
+                <a href="#section-about" class="nav-link">서비스 소개</a>
+                <a href="#section-notice" class="nav-link">공지사항</a>
+                <a href="#qna-view" class="nav-link" id="nav-qna-btn">Q&A 게시판</a>
+            </nav>
+
+            <div class="header-right">
+                <!-- 우측 상단 마이페이지 드로어 트리거 -->
+                <button class="mypage-btn" id="mypage-trigger" title="마이페이지 메뉴 열기">
+                    <span class="avatar-icon">👤</span>
+                    <span class="btn-text">마이페이지</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ==========================================
+             PAGES VIEW SYSTEM (각각 개별 페이지로 구성)
+             ========================================== -->
+
+        <!-- 2-1. HOME VIEW (메인 랜딩 페이지) -->
+        <main id="home-view" class="view active">
+            <!-- 웹사이트 히어로 타이틀 -->
+            <section class="hero-section">
+                <span class="hero-badge">원격 반려견 1:1 매칭 & 공동 케어 플랫폼</span>
+                <h1>당신의 따뜻한 품을 <span class="highlight">원격으로</span> 나누어주세요</h1>
+                <p class="hero-subtext">집에서 강아지를 키우지 못하는 아쉬움을 달래고, 보호소 유기견의 수호천사가 되어 함께 키우는 기쁨을 느껴보세요.</p>
+            </section>
+
+            <!-- 흘러가는 강아지 사진 탭 (Marquee 스타일 가로 루프 - 좌 -> 우) -->
+            <section class="dog-carousel-section">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="dog-carousel-track">
+                        <!-- JS에서 강아지 카드 무한 스크롤 생성 예정 -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 선택된 강아지 상세 정보 카드 (대시보드형 2단 그리드) -->
+            <section class="active-dog-section">
+                <div class="section-title">
+                    <h2>지금 당신을 기다리는 댕댕이 🐾</h2>
+                    <p>카드를 클릭하여 상세 정보와 실시간 산책 Live를 감상해 보세요.</p>
+                </div>
+                
+                <div class="dog-dashboard-grid" id="active-dog-card">
+                    <!-- 왼쪽 단: 이미지 영역 -->
+                    <div class="dog-image-col">
+                        <div class="dog-photo-placeholder" id="dog-photo-trigger">
+                            <div class="placeholder-grid-pattern"></div>
+                            <span class="placeholder-text">📸</span>
+                            <div class="photo-info-overlay">
+                                <span class="click-hint">터치 시 1인칭 산책 Live로 이동</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 오른쪽 단: 텍스트 및 상태 지표 -->
+                    <div class="dog-info-col">
+                        <div class="dog-info-header">
+                            <div class="title-wrap" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                                <h3 class="dog-name" id="dog-name" style="margin-bottom:0;">초코</h3>
+                                <span class="dog-tag" id="dog-breed">골든 리트리버 믹스</span>
+                                <button class="live-badge-btn" id="active-dog-live-btn" style="background:var(--status-red); color:#fff; border:none; padding:5px 12px; border-radius:20px; font-weight:800; font-size:0.7rem; cursor:pointer; display:inline-flex; align-items:center; gap:6px; animation: pulseHint 2s infinite; box-shadow: 0 3px 8px rgba(239, 68, 68, 0.35); outline: none;">
+                                    <span class="live-dot-mini" style="width:6px; height:6px; background:#fff; border-radius:50%; display:inline-block; animation: pulseDot 1.5s infinite alternate;"></span>LIVE 🔴
+                                </button>
+                            </div>
+                        </div>
+
+                        <p class="dog-desc" id="dog-desc">사람을 무척 좋아하고 활발한 성격입니다. 산책 나가는 것을 정말 좋아해요!</p>
+                        
+                        <div class="dog-stats-grid">
+                            <div class="stat-pill">나이: <strong id="dog-age">2살</strong></div>
+                            <div class="stat-pill">성별: <strong id="dog-gender">남아(중성화)</strong></div>
+                            <div class="stat-pill">체중: <strong id="dog-weight">18.5kg</strong></div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- 홈 하단 3대 고정 버튼 (상시 노출) -->
+            <section class="main-cta-section">
+                <div class="cta-grid">
+                    <button class="cta-card sponsor-one" id="sponsor-one-btn">
+                        <div class="cta-icon">💖</div>
+                        <div class="cta-content">
+                            <h3>1:1 후원 신청</h3>
+                            <p>선택한 강아지와 1대1로 직접 매칭되어 단독 수호천사로 정기 후원하기</p>
+                        </div>
+                    </button>
+                    
+                    <button class="cta-card sponsor-group" id="sponsor-group-btn">
+                        <div class="cta-icon">🤝</div>
+                        <div class="cta-content">
+                            <h3>공동 후원 신청</h3>
+                            <p>친구, 가족 혹은 다른 후원자들과 힘을 합쳐 한 마리를 같이 키우기</p>
+                        </div>
+                    </button>
+                    
+                    <button class="cta-card find-shelter" id="find-shelter-btn">
+                        <div class="cta-icon">📍</div>
+                        <div class="cta-content">
+                            <h3>내 주변 보호소 찾기</h3>
+                            <p>현재 내 위치를 기반으로 실시간 라이브캠이 가동 중인 주변 보호소 검색</p>
+                        </div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 최하단 추가 섹션 -->
+            <!-- 1) 사이트 소개 -->
+            <section class="about-section" id="section-about">
+                <div class="section-title">
+                    <h2>PWP와 함께하는 따뜻한 경험 🐾</h2>
+                    <p>원격으로 강아지를 키우며 정서적 안정을 찾고 생명을 지키는 6대 주요 서비스입니다.</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="num">01</div>
+                        <h4>정성스러운 성장 성장 기록 앨범</h4>
+                        <p>매월 정기 후원금 사용 내역과 함께 강아지의 키, 몸무게 성장 기록 및 보호소 일상 사진이 담긴 개별 추억 앨범을 배달해 드립니다.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="num">02</div>
+                        <h4>1인칭 산책 라이브 스트리밍</h4>
+                        <p>강아지 목줄이나 산책 훈련사의 웨어러블 카메라를 통해 강아지의 활기찬 산책길을 실시간 1인칭 영상으로 대리 생동감 있게 체험합니다.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="num">03</div>
+                        <h4>24시간 실시간 홈캠 서비스</h4>
+                        <p>생활관 내 고화질 카메라를 스마트폰이나 데스크톱으로 원격 각도를 회전시켜가며 강아지의 실시간 노는 모습과 취침 모습을 볼 수 있습니다.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="num">04</div>
+                        <h4>보호소 봉사 체험 프로그램</h4>
+                        <p>단순 원격을 넘어 실제 보호소의 대청소, 빗질 봉사, 산책 훈련 봉사 등에 참여해 유기견들과 신체적인 스킨십을 나눌 수 있습니다.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="num">05</div>
+                        <h4>오프라인 면회 및 일일 데이트</h4>
+                        <p>미리 시간 예약 신청을 완료한 후 보호소에 직접 방문해 전용 실내/실외 공간에서 함께 오붓하게 데이트 시간을 가질 수 있습니다.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="num">06</div>
+                        <h4>소중한 인연의 실제 입양 신청</h4>
+                        <p>원격 후원 및 현장 대면 교감을 통해 평생 가족이 되기로 결심하셨다면, 정식 온라인 입양 신청과 적격성 심사를 통해 정식 동반 귀가가 가능합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2) 공지사항 -->
+            <section class="notice-section" id="section-notice">
+                <div class="section-title">
+                    <h2>공지사항 & 보호소 소식 📢</h2>
+                    <p>보호소의 새로운 댕댕이 소식 및 플랫폼 업데이트 정보를 가장 먼저 전해드립니다.</p>
+                </div>
+                <div class="notice-list">
+                    <div class="notice-item">
+                        <span class="notice-tag badge-info">안내</span>
+                        <div class="notice-body">
+                            <h4 class="notice-subject">[안내] 6월 보호소 주말 봉사자 정기 모집 및 신청 방법</h4>
+                            <span class="notice-date">2026-06-01</span>
+                        </div>
+                    </div>
+                    <div class="notice-item">
+                        <span class="notice-tag badge-alert">시스템</span>
+                        <div class="notice-body">
+                            <h4 class="notice-subject">[점검] 서교 동물 쉼터 CAM 03번 렌격 제어 센서 정기 점검 안내 (06/03)</h4>
+                            <span class="notice-date">2026-05-28</span>
+                        </div>
+                    </div>
+                    <div class="notice-item">
+                        <span class="notice-tag badge-success">입양</span>
+                        <div class="notice-body">
+                            <h4 class="notice-subject">[축하] 1:1 매칭으로 활약하던 리트리버 '보리'가 마침내 따뜻한 가정으로 정식 입양되었습니다!</h4>
+                            <span class="notice-date">2026-05-24</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- 2-2. SPONSOR SELECT PAGE (보호소 및 강아지 선택 페이지 - 개별 화면) -->
+        <section id="sponsor-select-view" class="view">
+            <div class="web-content-wrapper max-width-1000">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>후원 대상 선택</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="select-flow-container">
+                    <!-- 1단계: 보호소 선택 방식 탭 -->
+                    <div class="select-step-section">
+                        <h3 class="step-title"><span class="step-num">1</span> 보호소를 선택해 주세요 📍</h3>
+                        
+                        <!-- 듀얼 모드 탭 스위처 -->
+                        <div class="select-mode-tabs">
+                            <button type="button" class="mode-tab-btn active" data-mode="area">지역별 찾기 🗺️</button>
+                            <button type="button" class="mode-tab-btn" data-mode="map">지도에서 직접 찾기 🐾</button>
+                        </div>
+
+                        <!-- 2-1) 지역별 찾기 패널 -->
+                        <div id="area-select-panel" class="select-mode-panel active">
+                            <div class="select-box-row">
+                                <div class="select-group">
+                                    <label for="area-city">시/도 선택</label>
+                                    <select id="area-city">
+                                        <option value="">-- 시/도 선택 --</option>
+                                        <option value="서울시" selected>서울시</option>
+                                        <option value="경기도">경기도</option>
+                                        <option value="인천시">인천시</option>
+                                        <option value="부산시">부산시</option>
+                                    </select>
+                                </div>
+                                <div class="select-group">
+                                    <label for="area-district">구/군 선택</label>
+                                    <select id="area-district">
+                                        <option value="">-- 구/군 선택 --</option>
+                                        <option value="마포구" selected>마포구</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="select-shelter-grid" id="area-shelter-grid" style="margin-top: 20px;">
+                                <!-- JS에서 동적 렌더링 예정 -->
+                            </div>
+                        </div>
+
+                        <!-- 2-2) 지도에서 찾기 패널 (기본 숨김) -->
+                        <div id="map-select-panel" class="select-mode-panel hidden">
+                            <div class="mini-select-map-container">
+                                <div class="mini-select-map">
+                                    <div class="map-grid-overlay"></div>
+                                    <span class="placeholder-text">🗺️ 전국 보호소 위치도</span>
+                                    
+                                    <!-- 지도 위의 핀 (🐾) -->
+                                    <div class="select-map-pin active" style="top: 28%; left: 35%;" data-shelter="마포 유기견 행복 보호소" title="마포 유기견 행복 보호소">🐾</div>
+                                    <div class="select-map-pin" style="top: 22%; left: 38%;" data-shelter="서교 동물 나눔 쉼터" title="서교 동물 나눔 쉼터">🐾</div>
+                                    <div class="select-map-pin" style="top: 34%; left: 32%;" data-shelter="희망 동물 Care 센터" title="희망 동물 Care 센터">🐾</div>
+                                    <div class="select-map-pin" style="top: 38%; left: 45%;" data-shelter="분당 유기견 구호 보호소" title="분당 유기견 구호 보호소">🐾</div>
+                                    <div class="select-map-pin" style="top: 30%; left: 22%;" data-shelter="인천 늘푸른 케어 쉼터" title="인천 늘푸른 케어 쉼터">🐾</div>
+                                    <div class="select-map-pin" style="top: 75%; left: 75%;" data-shelter="부산 광안 댕댕이 쉼터" title="부산 광안 댕댕이 쉼터">🐾</div>
+                                </div>
+                                <div class="selected-map-shelter-info" id="selected-map-shelter-info">
+                                    <h4>선택된 보호소: <span class="highlight" id="map-shelter-name-display">마포 유기견 행복 보호소</span></h4>
+                                    <p id="map-shelter-address-display">서울시 마포구 대흥로 123-45</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 단계 2: 강아지 선택 -->
+                    <div class="select-step-section" style="margin-top: 40px;">
+                        <h3 class="step-title"><span class="step-num">2</span> 후원할 강아지를 선택해 주세요 🐶</h3>
+                        <div class="select-dog-grid" id="select-dog-grid">
+                            <div class="select-dog-empty">
+                                💡 위의 보호소를 최종 선택하시면, 해당 보호소에서 보호 중인 아이들이 나타납니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-3. SPONSORSHIP PAGE (단독 후원 신청 페이지 - 개별 화면) -->
+        <section id="sponsorship-view" class="view">
+            <div class="web-content-wrapper max-width-800">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>정기 돌봄 후원 신청서</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="sponsor-form-layout">
+                    <!-- 매칭 강아지 요약 카드 -->
+                    <div class="sponsor-target-card">
+                        <span class="badge">매칭 대상견</span>
+                        <div class="target-profile">
+                            <div class="target-thumb">🐶</div>
+                            <div class="target-meta">
+                                <h4 id="sponsor-target-name">초코</h4>
+                                <p id="sponsor-target-breed">골든 리트리버 믹스</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="sponsorship-form" class="booking-form">
+                        <div class="form-group">
+                            <label>1. 후원 유형 선택</label>
+                            <div class="form-options-grid">
+                                <label class="option-pill">
+                                    <input type="radio" name="sponsor-type" value="one" checked>
+                                    <span class="option-label-text">1:1 단독 정기 후원 (₩30,000 / 월)</span>
+                                </label>
+                                <label class="option-pill">
+                                    <input type="radio" name="sponsor-type" value="group">
+                                    <span class="option-label-text">공동 매칭 후원 (₩10,000 / 월)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>2. 후원액 정밀 지정 (월 정기 결제)</label>
+                            <div class="amount-select-grid">
+                                <button type="button" class="amount-btn active" data-amt="30000">₩ 30,000</button>
+                                <button type="button" class="amount-btn" data-amt="50000">₩ 50,000</button>
+                                <button type="button" class="amount-btn" data-amt="100000">₩ 100,000</button>
+                                <button type="button" class="amount-btn" id="custom-amt-trigger">직접 입력</button>
+                            </div>
+                            <input type="number" id="sponsorship-amount" class="hidden-input-num" value="30000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sponsor-payment-method">3. 결제 수단 선택</label>
+                            <select id="sponsor-payment-method" required>
+                                <option value="credit">간편 신용카드 등록 (가상 결제)</option>
+                                <option value="pwppay">PWP페이 (PwpPay 간편결제)</option>
+                                <option value="bank">실시간 간편 계좌이체</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sponsor-message">4. 강아지에게 남길 한 마디 (앨범/기록부에 등재)</label>
+                            <textarea id="sponsor-message" rows="3" placeholder="예: 초코야, 아프지 말고 보호소에서 매일 맛있는 것 많이 먹으면서 튼튼하게 자라줘!" required></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-wrap">
+                            <label class="radio-label">
+                                <input type="checkbox" required checked> 원격 후원금 사용 약관 및 유기견 보호 규정을 확인하였으며 이에 동의합니다.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">수호천사 매칭 신청 완료하기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-3. SHELTER MAP VIEW (보호소 지도 페이지 - 개별 화면) -->
+        <section id="map-view" class="view">
+            <header class="view-header">
+                <button class="back-btn router-back-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    <span>뒤로가기</span>
+                </button>
+                <h3>내 주변 보호소 찾기</h3>
+                <div style="width:70px;"></div>
+            </header>
+                
+                <div class="map-view-layout">
+                    <!-- 좌측: 지도 그래픽 영역 -->
+                    <div class="map-graphic-col">
+                        <div class="mock-map-container">
+                            <div class="map-grid-overlay"></div>
+                            <span class="placeholder-text"></span>
+                            
+                            <!-- 지도 핀 -->
+                            <div class="map-pin active" style="top: 35%; left: 45%;" data-name="마포 유기견 행복 보호소">🐾</div>
+                            <div class="map-pin" style="top: 55%; left: 30%;" data-name="희망 동물 Care 센터">🐾</div>
+                            <div class="map-pin" style="top: 25%; left: 70%;" data-name="서교 동물 나눔 쉼터">🐾</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 우측: 보호소 검색 및 목록 영역 -->
+                    <div class="map-list-col">
+                        <div class="search-bar">
+                            <input type="text" placeholder="지역구 또는 보호소 이름 입력..." value="서울시 마포구">
+                            <button class="search-btn">검색</button>
+                        </div>
+                        
+                        <div class="shelter-info-panel">
+                            <h4>주변에 <span class="highlight">3개</span>의 보호소가 있습니다.</h4>
+                            <div class="shelter-list">
+                                <div class="shelter-card active" data-pin="0">
+                                    <div class="shelter-name">마포 유기견 행복 보호소 (0.6km)</div>
+                                    <div class="shelter-address">서울시 마포구 대흥로 123-45</div>
+                                    <div class="shelter-stats">
+                                        <span class="live-cam-badge">🟢 Live CAM 6대 가동 중</span>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary select-shelter-btn">방문 예약하기</button>
+                                </div>
+                                <div class="shelter-card" data-pin="1">
+                                    <div class="shelter-name">희망 동물 Care 센터 (1.4km)</div>
+                                    <div class="shelter-address">서울시 마포구 신촌로 88</div>
+                                    <div class="shelter-stats">
+                                        <span class="live-cam-badge">🟢 Live CAM 4대 가동 중</span>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary select-shelter-btn">방문 예약하기</button>
+                                </div>
+                                <div class="shelter-card" data-pin="2">
+                                    <div class="shelter-name">서교 동물 나눔 쉼터 (2.1km)</div>
+                                    <div class="shelter-address">서울시 마포구 와우산로 12</div>
+                                    <div class="shelter-stats">
+                                        <span class="live-cam-badge">🔴 Live CAM 일시 점검 중</span>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary select-shelter-btn">방문 예약하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- 2-4. WALK LIVE VIEW (1인칭 산책 라이브 페이지 - 개별 화면) -->
+        <section id="walk-live-view" class="view">
+            <header class="view-header trans-header">
+                <button class="back-btn router-back-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    <span>뒤로가기</span>
+                </button>
+                <div class="live-indicator">
+                    <span class="live-dot pulsing"></span>
+                    <span class="live-text">산책 LIVE</span>
+                </div>
+                <div style="width:70px;"></div>
+            </header>
+                
+                <div class="walk-view-layout">
+                    <div class="walk-video-col">
+                        <div class="walk-video-container">
+                            <div class="video-grid-pattern"></div>
+                            <span class="placeholder-text">📹</span>
+                            <div class="video-overlay-tint"></div>
+                            
+                            <div class="gps-mini-map">
+                                <div class="gps-radar"></div>
+                                <span class="gps-text">마포 공원 코스 1.2km</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="walk-control-col">
+                        <div class="walk-control-panel">
+                            <div class="stream-info">
+                                <h4 id="walk-dog-name">초코의 산책 라이브</h4>
+                                <p>산책 진행: 보호소 훈련팀 김민수 도우미</p>
+                            </div>
+                            
+                            <!-- 실시간 행동 요구 처리 현황판 -->
+                            <div class="action-request-log-box">
+                                <div class="log-title">📋 행동 요구 처리 대장</div>
+                                <div class="log-content-list" id="action-log-list">
+                                    <div class="log-item system">💡 하단 입력란에 강아지가 취할 행동을 입력하여 현장 직원에게 요구해 보세요. (예: "앉아", "뛰어", "기다려", "손", "간식", "물")</div>
+                                </div>
+                            </div>
+                            
+                            <!-- 행동 요구 입력란 -->
+                            <div class="chat-input-bar action-request-bar">
+                                <input type="text" id="action-request-input" placeholder="현장 직원에게 보낼 행동 요구 입력...">
+                                <button id="action-request-send">전송</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- 2-5. RECORDS VIEW (내 후원 기록 페이지 - 개별 화면) -->
+        <section id="records-view" class="view">
+            <div class="web-content-wrapper max-width-800">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>내 돌봄 후원 내역</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="stats-summary-card">
+                    <div class="summary-item">
+                        <span class="label">총 매칭 댕댕이</span>
+                        <span class="value" id="stats-dog-count">1 마리</span>
+                    </div>
+                    <div class="summary-item border-left">
+                        <span class="label">총 누적 후원금</span>
+                        <span class="value highlight" id="stats-total-money">₩ 150,000</span>
+                    </div>
+                </div>
+
+                <div class="history-section">
+                    <h4>정기 돌봄 후원 현황</h4>
+                    <div class="sponsor-card-active-info">
+                        <div class="dog-thumb-mini">🐶</div>
+                        <div class="info">
+                            <div class="name"><strong id="record-dog-name">초코</strong> 후원 중</div>
+                            <div class="detail">정기 후원: 매월 ₩30,000 (1:1 매칭)</div>
+                            <div class="detail">후원 시작일: 2026-04-12</div>
+                        </div>
+                    </div>
+
+                    <h4>특별 지정 선물 내역</h4>
+                    <div class="timeline" id="special-gifts-timeline">
+                        <!-- JS 연동 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-6. ALBUM VIEW (성장 일지 & 앨범 페이지 - 개별 화면) -->
+        <section id="album-view" class="view">
+            <div class="web-content-wrapper max-width-1000">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2><span id="album-dog-name">초코</span>의 성장 기록부</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="growth-stats-grid">
+                    <div class="stat-box">
+                        <div class="lbl">나이</div>
+                        <div class="val" id="album-dog-age">2살 3개월</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="lbl">현재 몸무게</div>
+                        <div class="val" id="album-dog-weight-val">18.5 kg</div>
+                        <div class="change green">▲ 0.5kg 증가</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="lbl">키 (어깨 높이)</div>
+                        <div class="val" id="album-dog-height-val">52 cm</div>
+                        <div class="change green">▲ 1cm 성장</div>
+                    </div>
+                </div>
+
+                <!-- 최근 건강 코멘트 -->
+                <div class="health-card">
+                    <h5>🩺 보호소 주치의 소견</h5>
+                    <p id="album-dog-health">"종합 백신 추가 접종을 완료하였으며, 활력 상태가 최고조입니다. 식욕이 왕성해졌으며 대소변 상태도 양호합니다."</p>
+                </div>
+
+                <!-- 개월별 성장 변화 역사 -->
+                <div class="growth-history-card">
+                    <h5>📈 개월별 성장 변화 역사</h5>
+                    <p class="history-desc">아이의 개월수별 몸무게와 키 성장 추이를 비교해 볼 수 있습니다.</p>
+                    
+                    <!-- 토글 탭 -->
+                    <div class="history-tab-bar">
+                        <button type="button" class="history-tab-btn active" data-view="chart-weight">몸무게 추이 차트</button>
+                        <button type="button" class="history-tab-btn" data-view="chart-height">키 추이 차트</button>
+                        <button type="button" class="history-tab-btn" data-view="table">전체 기록부 테이블</button>
+                    </div>
+
+                    <!-- 컨텐츠 영역 -->
+                    <div class="history-content-container">
+                        <!-- 1) 차트 패널 -->
+                        <div id="growth-chart-panel" class="history-panel active">
+                            <div class="growth-chart-wrapper" id="growth-chart-container">
+                                <!-- JS 동적 바 생성 -->
+                            </div>
+                        </div>
+
+                        <!-- 2) 테이블 패널 -->
+                        <div id="growth-table-panel" class="history-panel hidden">
+                            <div class="growth-table-wrapper">
+                                <table class="growth-history-table">
+                                    <thead>
+                                        <tr>
+                                            <th>나이</th>
+                                            <th>몸무게 (kg)</th>
+                                            <th>키 (cm)</th>
+                                            <th>의료/상태 코멘트</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="album-growth-history-body">
+                                        <!-- JS 동적 행 생성 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 실물 성장 앨범 신청 및 구매 배너 -->
+                <div class="album-purchase-banner">
+                    <div class="banner-badge">NEW PREMIUM OPTION</div>
+                    <div class="banner-content">
+                        <h4>🎁 이 아이와의 소중한 추억을 실물 성장 앨범으로 평생 간직해 보세요!</h4>
+                        <p>후원자님께 매월 기록되는 키, 몸무게 및 다양한 일상 사진들을 고화질 포토북으로 엮어 배송해 드립니다.</p>
+                    </div>
+                    <button class="btn btn-primary" id="album-order-trigger-btn">실물 앨범 신청 & 구매하기</button>
+                </div>
+
+                <!-- 앨범 그리드 -->
+                <div class="album-section">
+                    <h4>추억 앨범</h4>
+                    <div class="album-grid">
+                        <div class="album-item">
+                            <div class="album-photo-placeholder">
+                                <img src="images/choco_tug.png" alt="신나는 터그 놀이 시간!" style="width:100%; height:100%; object-fit:contain; border-radius:inherit; background-color:#f1f5f9;">
+                            </div>
+                            <span class="album-caption">신나는 터그 놀이 시간!</span>
+                        </div>
+                        <div class="album-item">
+                            <div class="album-photo-placeholder">
+                                <img src="images/choco_sleep.png" alt="낮잠 자는 모습" style="width:100%; height:100%; object-fit:contain; border-radius:inherit; background-color:#f1f5f9;">
+                            </div>
+                            <span class="album-caption">낮잠 자는 모습</span>
+                        </div>
+                        <div class="album-item">
+                            <div class="album-photo-placeholder">
+                                <img src="images/choco_cuddle.png" alt="보호사님 품에서 애교" style="width:100%; height:100%; object-fit:contain; border-radius:inherit; background-color:#f1f5f9;">
+                            </div>
+                            <span class="album-caption">보호사님 품에서 애교</span>
+                        </div>
+                        <div class="album-item">
+                            <div class="album-photo-placeholder">
+                                <img src="images/choco_walk.png" alt="공원 야외 첫 1인칭 산책" style="width:100%; height:100%; object-fit:contain; border-radius:inherit; background-color:#f1f5f9;">
+                            </div>
+                            <span class="album-caption">공원 야외 첫 1인칭 산책</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-7. CAM VIEW (실시간 홈캠 페이지 - 개별 화면) -->
+        <section id="cam-view" class="view">
+            <div class="web-content-wrapper max-width-800">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>실시간 홈캠 감상</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="cam-screen-container">
+                    <div class="video-grid-pattern"></div>
+                    <div class="cam-badge">🟢 CAM 01 - 생활관</div>
+                    <span class="placeholder-text"></span>
+                    
+                    <div class="cam-navigation">
+                        <button class="cam-nav-btn" id="cam-up">▲</button>
+                        <div class="cam-nav-row">
+                            <button class="cam-nav-btn" id="cam-left">◀</button>
+                            <span class="nav-center">원격<br>각도</span>
+                            <button class="cam-nav-btn" id="cam-right">▶</button>
+                        </div>
+                        <button class="cam-nav-btn" id="cam-down">▼</button>
+                    </div>
+                </div>
+
+                <div class="cam-channels">
+                    <h4>카메라 채널 선택</h4>
+                    <div class="channel-buttons">
+                        <button class="btn btn-sm channel-btn active" data-cam="01 - 생활관">CAM 01 (생활관)</button>
+                        <button class="btn btn-sm channel-btn" data-cam="02 - 실내 운동장">CAM 02 (실내 운동장)</button>
+                        <button class="btn btn-sm channel-btn" data-cam="03 - 야외 쉼터">CAM 03 (야외 쉼터)</button>
+                    </div>
+                </div>
+
+                <div class="cam-tip">
+                    <p>💡 실시간 홈캠 서비스는 매일 09:00 ~ 20:00 사이에 송출됩니다. 상단의 회전 컨트롤 패널을 사용하여 모의 카메라의 각도를 좌우로 기울일 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-8. VOLUNTEER VIEW (방문 및 봉사 예약 페이지 - 개별 화면) -->
+        <section id="volunteer-view" class="view">
+            <div class="web-content-wrapper max-width-800">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>보호소 방문 & 봉사 신청</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <form id="volunteer-form" class="booking-form">
+                    <div class="form-group">
+                        <label for="booking-type">신청 유형</label>
+                        <select id="booking-type" required>
+                            <option value="meet">매칭 댕댕이 1:1 직접 만나기 (면회)</option>
+                            <option value="walk">동반 실외 산책 봉사</option>
+                            <option value="clean">보호소 위생/청소/돌봄 봉사</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="booking-date">희망 날짜</label>
+                        <input type="date" id="booking-date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>희망 시간 세션</label>
+                        <div class="time-slot-grid">
+                            <button type="button" class="time-slot" data-time="10:00 ~ 12:00">오전 (10:00)</button>
+                            <button type="button" class="time-slot active" data-time="14:00 ~ 16:00">오후 1 (14:00)</button>
+                            <button type="button" class="time-slot" data-time="16:00 ~ 18:00">오후 2 (16:00)</button>
+                        </div>
+                        <input type="hidden" id="booking-time" value="14:00 ~ 16:00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visitor-name">예약자 성함</label>
+                        <input type="text" id="visitor-name" placeholder="홍길동" required value="홍길동">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visitor-phone">연락처</label>
+                        <input type="tel" id="visitor-phone" placeholder="010-0000-0000" required value="010-1234-5678">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">방문 예약 신청서 제출</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 2-9. ADOPT VIEW (입양 심사 신청 페이지 - 개별 화면) -->
+        <section id="adopt-view" class="view">
+            <div class="web-content-wrapper max-width-800">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>정식 입양 심사 신청서</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="adopt-steps">
+                    <h4>입양 프로세스</h4>
+                    <div class="step-progress-bar">
+                        <div class="progress-line"></div>
+                        <div class="step-dot active">1</div>
+                        <div class="step-dot">2</div>
+                        <div class="step-dot">3</div>
+                        <div class="step-dot">4</div>
+                    </div>
+                    <div class="step-labels">
+                        <span class="active">신청서</span>
+                        <span>비대면면담</span>
+                        <span>현장교감</span>
+                        <span>입양확정</span>
+                    </div>
+                </div>
+
+                <form id="adopt-form" class="booking-form">
+                    <h4 class="form-section-title">입양 적합성 진단 설문</h4>
+                    
+                    <div class="form-group">
+                        <label for="adopt-home">주거 환경 형태</label>
+                        <select id="adopt-home" required>
+                            <option value="apartment">아파트 / 다세대 주택</option>
+                            <option value="house">단독 주택 (마당 있음)</option>
+                            <option value="studio">원룸 / 오피스텔</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adopt-experience">반려견 양육 경험</label>
+                        <select id="adopt-experience" required>
+                            <option value="none">없음 (처음 키워봄)</option>
+                            <option value="past">과거에 키워본 적 있음</option>
+                            <option value="current">현재 다른 반려견 양육 중</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adopt-time">하루에 혼자 두는 시간 (평균)</label>
+                        <select id="adopt-time" required>
+                            <option value="short">3시간 미만</option>
+                            <option value="mid">3시간 ~ 6시간</option>
+                            <option value="long">6시간 이상</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>가족 구성원의 전원 동의 여부</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="family-agree" value="yes" checked> 동의함
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="family-agree" value="no"> 협의 중
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adopt-reason">입양을 결심하게 된 계기</label>
+                        <textarea id="adopt-reason" rows="3" placeholder="원격 돌봄 후원을 통해 깊은 인연을 맺고 실제 입양을 신청하게 된 사유를 적어주세요..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">입양 적격 심사 신청</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 2-10. COSPONSOR VIEW (공동 후원 친구 초대 페이지 - 개별 화면) -->
+        <section id="cosponsor-view" class="view">
+            <div class="web-content-wrapper max-width-800">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>공동 후원자 초대 (같이 키우기)</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="co-group-card">
+                    <div class="group-header">
+                        <span class="group-tag">공동 후원 팀</span>
+                        <h4 id="co-group-name">초코네 수호천사들</h4>
+                    </div>
+                    <p class="group-goal">공동 돌봄 후원에 참여 중인 수호천사 목록입니다.</p>
+                    
+                    <div class="member-list-mini">
+                        <div class="member-badge">김*수 (방장)</div>
+                        <div class="member-badge">나 (후원자)</div>
+                        <div class="add-member-placeholder">+ 초대 대기 중</div>
+                    </div>
+                </div>
+
+                <div class="invite-action-section">
+                    <h4>🤝 친구 초대 및 공동 수호천사 등록</h4>
+                    <p>이 아이의 원격 공동 후원자로 가족이나 친구들을 초대하는 고유 링크를 생성합니다.</p>
+                    
+                    <div class="form-group">
+                        <label for="invite-friend-name">초대할 친구 닉네임</label>
+                        <input type="text" id="invite-friend-name" placeholder="예: 단짝친구, 댕댕러버" value="댕댕러버">
+                    </div>
+
+                    <button class="btn btn-primary btn-block" id="generate-invite-link-btn">초대 링크 생성 및 복사하기</button>
+
+                    <div class="invite-link-result hidden" id="invite-link-result">
+                        <div class="link-label">공유 링크:</div>
+                        <div class="link-box">
+                            <span id="invite-url-text">https://pwp.co.kr/invite/choco?code=A87XF9</span>
+                        </div>
+                        <span class="copy-success-lbl">✓ 클립보드에 복사되었습니다! 카카오톡 등으로 공유해 보세요.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-11. Q&A BOARD PAGE (Q&A 게시판 페이지 - 개별 화면) -->
+        <section id="qna-view" class="view">
+            <div class="web-content-wrapper max-width-1000">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>Q&A 질문 게시판</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="qna-board-container">
+                    <div class="qna-section" id="section-qna" style="margin-top: 0; padding: 0;">
+                        <div class="section-title">
+                            <h2>자주 묻는 질문 & 1:1 Q&A 💬</h2>
+                            <p>서비스 이용에 대한 자주 묻는 질문을 확인하고, 직접 1대1 질문을 등록할 수 있습니다.</p>
+                        </div>
+                        
+                        <div class="qna-container">
+                            <div class="faq-list">
+                                <div class="faq-item">
+                                    <div class="faq-question">Q. 집이 아파트인데 매칭 후원하는 데 자격 제한이 있나요?</div>
+                                    <div class="faq-answer">A. 원격 매칭 및 정기 후원은 주거 형태나 소득과 상관없이 강아지를 사랑하는 누구나 즉시 신청할 수 있습니다. 단, 실제 방문이나 정식 입양 시에는 적합한 양육 환경 검증 과정이 진행됩니다.</div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-question">Q. 후원금은 구체적으로 어떻게 쓰이나요?</div>
+                                    <div class="faq-answer">A. 후원금은 100% 강아지의 사료비, 위생용품비, 상해 치료비 및 질병 예방백신비에 우선 할당되며 상세 사용 내역서는 마이페이지 성장 앨범에 투명하게 월별 공개됩니다.</div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-question">Q. 공동 후원 시 친구는 어떻게 초대하나요?</div>
+                                    <div class="faq-answer">A. 마이페이지 내 '같이 키우기' 탭에서 초대할 친구의 닉네임을 입력하시면 고유의 초대 링크가 생성됩니다. 친구가 해당 링크로 접속해 승인하면 자동으로 그룹이 구성됩니다.</div>
+                                </div>
+                            </div>
+
+                            <div class="qna-form-box">
+                                <h4>궁금한 점이 해결되지 않으셨나요? 질문 남기기</h4>
+                                <form id="qna-mock-form">
+                                    <div class="form-row-2">
+                                        <input type="text" id="qna-writer" placeholder="작성자 닉네임" required>
+                                        <input type="password" id="qna-pwd" placeholder="비밀번호" required>
+                                    </div>
+                                    <textarea id="qna-content" placeholder="질문 내용을 상세히 작성해 주세요. 보호소 담당 직원이 수일 내에 답변을 달아드립니다." rows="3" required></textarea>
+                                    <button type="submit" class="btn btn-primary">질문 등록하기</button>
+                                </form>
+                            </div>
+
+                            <div class="user-qna-list" id="user-qna-list">
+                                <h4>최근 등록된 1:1 사용자 질문</h4>
+                                <div class="user-qna-item">
+                                    <div class="qna-meta"><span>작성자: 뭉치아빠</span> • <span>상태: 답변완료</span></div>
+                                    <p class="qna-text">뭉치의 1인칭 산책 라이브 시간이 매번 겹쳐서 그런데 산책 요일이나 시간을 조금 변경하는 것도 가능한가요?</p>
+                                    <div class="qna-reply">🐾 [답변] 네 후원자님, 마이페이지의 '만나러 가기' 메뉴를 통해 별도로 조율된 시간 산책을 예약해주시면 해당 타임에 산책 Live를 송출해 드릴 수 있습니다.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2-12. ALBUM BUY VIEW (실물 앨범 신청 및 구매 페이지 - 개별 화면) -->
+        <section id="album-buy-view" class="view">
+            <div class="web-content-wrapper max-width-800">
+                <header class="page-title-header">
+                    <button class="back-btn router-back-btn" id="album-buy-back-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>뒤로가기</span>
+                    </button>
+                    <h2>실물 성장 앨범 주문서</h2>
+                    <div style="width:70px;"></div>
+                </header>
+
+                <div class="album-order-layout">
+                    <!-- 왼쪽 단: 주문 입력 폼 -->
+                    <form id="album-order-form" class="booking-form" style="flex: 1.3;">
+                        <div class="form-group">
+                            <label>1. 맞춤 대상 댕댕이</label>
+                            <div class="sponsor-target-card" style="margin-top:0;">
+                                <div class="target-profile">
+                                    <div class="target-thumb">📖</div>
+                                    <div class="target-meta">
+                                        <h4 id="album-buy-dog-name">초코</h4>
+                                        <p>전용 1:1 맞춤형 성장 포토북 제작</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>2. 앨범 커버 사양 선택</label>
+                            <div class="form-options-grid">
+                                <label class="option-pill">
+                                    <input type="radio" name="album-cover-type" value="hard" checked>
+                                    <span class="option-label-text">프리미엄 하드커버 (₩25,000)</span>
+                                </label>
+                                <label class="option-pill">
+                                    <input type="radio" name="album-cover-type" value="soft">
+                                    <span class="option-label-text">클래식 소프트북 (₩15,000)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="album-receiver">3. 배송 정보 입력</label>
+                            <div class="input-stacked-group">
+                                <input type="text" id="album-receiver" placeholder="수령인 이름" required value="홍길동" style="margin-bottom: 8px; width: 100%;">
+                                <input type="tel" id="album-phone" placeholder="연락처 (010-0000-0000)" required value="010-1234-5678" style="margin-bottom: 8px; width: 100%;">
+                                <div class="address-zip-row" style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                    <input type="text" id="album-zipcode" placeholder="우편번호" value="04000" style="flex:1;">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" id="btn-search-zip" style="height:42px; margin-top:0; white-space:nowrap; padding: 0 15px;">우편번호 검색</button>
+                                </div>
+                                <input type="text" id="album-address" placeholder="기본 주소" required value="서울시 마포구 독막로 12" style="margin-bottom: 8px; width: 100%;">
+                                <input type="text" id="album-address-detail" placeholder="상세 주소" value="102호" style="width: 100%;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="album-shipping-msg">4. 배송 요청 사항 (선택)</label>
+                            <select id="album-shipping-msg" style="width: 100%; height: 42px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0 12px; outline: none; margin-bottom: 8px;">
+                                <option value="default" selected>문 앞에 놓아주세요.</option>
+                                <option value="bell">경비실에 맡겨주세요.</option>
+                                <option value="call">배송 전 연락 바랍니다.</option>
+                                <option value="direct">직접 입력</option>
+                            </select>
+                            <input type="text" id="album-shipping-msg-custom" class="hidden-input-text hidden" placeholder="요청 사항을 직접 입력해 주세요." style="width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 12px; font-size: 0.95rem; outline: none;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="album-payment-method">5. 결제 수단 선택</label>
+                            <select id="album-payment-method" required style="width: 100%; height: 42px; border-radius: 8px; border: 1px solid #cbd5e1; padding: 0 12px; outline: none;">
+                                <option value="pwppay">PWP페이 (PwpPay 간편결제)</option>
+                                <option value="credit" selected>신용/체크카드 (가상 결제)</option>
+                                <option value="bank">실시간 간편 계좌이체</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:20px;">앨범 제작 및 모의 결제 완료하기</button>
+                    </form>
+
+                    <!-- 오른쪽 단: 영수증 카드 -->
+                    <div class="order-summary-card" style="flex: 0.9; height: fit-content;">
+                        <h4>결제 요약 내역 🧾</h4>
+                        <hr style="border: 0; border-top: 1px dashed rgba(0,0,0,0.15); margin: 15px 0;">
+                        <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
+                            <span style="color:var(--slate-600);">상품명</span>
+                            <strong id="summary-product-name" style="color:var(--dark);">초코의 성장 앨범 포토북</strong>
+                        </div>
+                        <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
+                            <span style="color:var(--slate-600);">앨범 사양</span>
+                            <span id="summary-cover-type" style="font-weight:600; color:var(--dark);">프리미엄 하드커버</span>
+                        </div>
+                        <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
+                            <span style="color:var(--slate-600);">상품 금액</span>
+                            <span id="summary-base-price" style="font-weight:600; color:var(--dark);">₩ 25,000</span>
+                        </div>
+                        <div class="summary-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
+                            <span style="color:var(--slate-600);">배송비</span>
+                            <span style="font-weight:600; color:var(--status-green);">무료 배송 (후원 특전)</span>
+                        </div>
+                        <hr style="border: 0; border-top: 1px dashed rgba(0,0,0,0.15); margin: 15px 0;">
+                        <div class="summary-total" style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                            <span style="font-weight:700; color:var(--dark);">최종 결제 금액</span>
+                            <span id="summary-total-price" style="font-size:1.3rem; font-weight:900; color:var(--primary);">₩ 25,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             DRAWER & OVERLAYS SYSTEM
+             ========================================== -->
+
+        <!-- 3. MY PAGE NAVIGATION SIDE DRAWER (사이드 드로어 메뉴 허브) -->
+        <div id="mypage-drawer" class="mypage-drawer-overlay">
+            <div class="drawer-panel">
+                <div class="drawer-header">
+                    <div class="header-title">
+                        <span class="user-avatar">👤</span>
+                        <h3>마이페이지 메뉴</h3>
+                    </div>
+                    <button class="close-drawer-btn" id="close-mypage-drawer">✕</button>
+                </div>
+                
+                <!-- 마이페이지 메뉴 목록 (클릭 시 드로어가 닫히고 해당 개별 상세 페이지 뷰로 라우팅) -->
+                <div class="mypage-menu-list">
+                    <button class="mypage-menu-btn" data-target="records-view">
+                        <span class="menu-icon">💳</span>
+                        <div class="menu-text-wrap">
+                            <span class="menu-title">내 돌봄 후원 내역</span>
+                            <span class="menu-subtitle">돌봄 후원금 결제 및 선물 내역</span>
+                        </div>
+                        <span class="menu-arrow">➔</span>
+                    </button>
+                    
+                    <button class="mypage-menu-btn" data-target="album-view">
+                        <span class="menu-icon">📖</span>
+                        <div class="menu-text-wrap">
+                            <span class="menu-title">성장 일지 & 앨범</span>
+                            <span class="menu-subtitle">아이의 성장 기록(키/몸무게) 및 일지</span>
+                        </div>
+                        <span class="menu-arrow">➔</span>
+                    </button>
+                    
+                    <button class="mypage-menu-btn" data-target="cam-view">
+                        <span class="menu-icon">📹</span>
+                        <div class="menu-text-wrap">
+                            <span class="menu-title">실시간 홈캠 보기</span>
+                            <span class="menu-subtitle">아이들이 자고 노는 방의 실시간 송출</span>
+                        </div>
+                        <span class="menu-arrow">➔</span>
+                    </button>
+                    
+                    <button class="mypage-menu-btn" data-target="walk-live-view">
+                        <span class="menu-icon">🦮</span>
+                        <div class="menu-text-wrap">
+                            <span class="menu-title">1인칭 산책 Live</span>
+                            <span class="menu-subtitle">아이의 역동적인 야외 산책길 실시간 감상</span>
+                        </div>
+                        <span class="menu-arrow">➔</span>
+                    </button>
+                    
+                    <button class="mypage-menu-btn" data-target="volunteer-view">
+                        <span class="menu-icon">🗓️</span>
+                        <div class="menu-text-wrap">
+                            <span class="menu-title">만나러 가기 / 예약</span>
+                            <span class="menu-subtitle">오프라인 1:1 방문 면회 및 봉사 예약</span>
+                        </div>
+                        <span class="menu-arrow">➔</span>
+                    </button>
+                    
+                    <button class="mypage-menu-btn" data-target="adopt-view">
+                        <span class="menu-icon">🏡</span>
+                        <div class="menu-text-wrap">
+                            <span class="menu-title">정식 입양 신청</span>
+                            <span class="menu-subtitle">수호동물 입양을 위한 심사 적합도 양식</span>
+                        </div>
+                        <span class="menu-arrow">➔</span>
+                    </button>
+                    
+                    <button class="mypage-menu-btn" data-target="cosponsor-view">
+                        <span class="menu-icon">🤝</span>
+                        <div class="menu-text-wrap">
+                            <span class="menu-title">같이 키우기 (친구 초대)</span>
+                            <span class="menu-subtitle">친구 및 지인을 공동 후원자로 초대하기</span>
+                        </div>
+                        <span class="menu-arrow">➔</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. FOOTER (하단 푸터 정보) -->
+        <footer class="web-footer-info">
+            <p>© 2026 PWP. All Rights Reserved. 본 사이트는 가상의 원격 유기견 매칭 서비스 프로토타입 시각화 사이트입니다.</p>
+        </footer>
+    </div>
+
+    <!-- 후원 처리 완료 공통 모달 -->
+    <div class="modal-backdrop" id="sponsor-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>후원 매칭 신청 완료</h4>
+                <button class="close-modal-btn" id="close-sponsor-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">🎉</div>
+                <h3 id="sponsor-success-title">1:1 매칭 후원 완료</h3>
+                <p id="sponsor-success-desc">매월 후원이 접수되었습니다.</p>
+                <button class="btn btn-primary btn-block" id="modal-confirm-btn">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 공통 알림 토스트 메시지 -->
+    <div class="toast-container" id="toast-message">
+        <span class="toast-text">메시지가 전송되었습니다.</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
