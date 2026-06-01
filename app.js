@@ -300,7 +300,6 @@ function queryDOMElements() {
 // 5. 3초 주기 무한 스와이프 캐러셀 (4x1 포맷)
 let carouselIndex = 0;
 let carouselTimer = null;
-const CARD_FULL_WIDTH = 245; // 카드너비 225px + gap 20px
 
 function initDogCarousel() {
     if (!dogCarouselTrack) return;
@@ -378,8 +377,13 @@ function slideNextCarousel() {
     
     carouselIndex++;
     
+    // 카드너비와 갭(desktop: 20px, mobile: 10px)을 포함한 실제 가로 크기를 동적으로 계산
+    const firstCard = dogCarouselTrack.querySelector(".carousel-card");
+    const gap = window.innerWidth <= 768 ? 10 : 20;
+    const cardFullWidth = firstCard ? firstCard.getBoundingClientRect().width + gap : 245;
+    
     dogCarouselTrack.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
-    dogCarouselTrack.style.transform = `translateX(${-carouselIndex * CARD_FULL_WIDTH}px)`;
+    dogCarouselTrack.style.transform = `translateX(${-carouselIndex * cardFullWidth}px)`;
     
     // 오리지널 카드 7개 뒤의 클론 카드 복제 지점(인덱스 7)에 도달하면 무한 회귀
     if (carouselIndex === DOGS_DATA.length) {
@@ -632,7 +636,6 @@ function bindNavigationEvents() {
             const targetViewId = btn.getAttribute("data-target");
             if (targetViewId) {
                 changeView(targetViewId);
-                showToast(`마이페이지 메뉴 [${btn.querySelector(".menu-title").textContent}]로 이동했습니다.`);
                 if (targetViewId === "walk-live-view") {
                     simulateLiveChat();
                 }

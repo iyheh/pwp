@@ -246,7 +246,7 @@ body {
 }
 
 .carousel-card {
-    width: 225px; /* (960px - 60px) / 4 = 225px */
+    width: calc((100% - 60px) / 4); /* (100% - gaps) / 4 */
     flex-shrink: 0;
     background: var(--light-bg);
     border: 1px solid #e2e8f0;
@@ -3324,6 +3324,34 @@ body {
     
     .order-summary-card {
         position: static;
+    }
+}
+
+/* 모바일용 4개 카드 강아지 캐러셀 스타일 보완 */
+@media (max-width: 768px) {
+    .dog-carousel-section {
+        padding: 10px;
+        margin: 15px auto;
+    }
+    .carousel-track {
+        gap: 10px;
+    }
+    .carousel-card {
+        width: calc((100% - 30px) / 4);
+        padding: 10px 5px;
+    }
+    .carousel-photo {
+        width: 45px;
+        height: 45px;
+        border-width: 2px;
+        margin-bottom: 6px;
+        font-size: 1.2rem;
+    }
+    .carousel-name {
+        font-size: 0.75rem;
+    }
+    .carousel-status {
+        font-size: 0.6rem;
     }
 }
 
